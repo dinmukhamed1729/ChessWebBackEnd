@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration</title>
+    </head>
+    <body>
+        <h2>Registration Form</h2>
+        <label for="inputName">Имя:</label>
+        <input type="text" id="inputName">
+        <span id="nameError" class="error"></span><br>
+        
+        <label for="inputEmail">Email:</label>
+        <input type="email" id="inputEmail">
+        <span id="emailError" class="error"></span><br>
+        
+        <label for="inputPassword">Пароль:</label>
+        <input type="password" id="inputPassword">
+        <span id="passwordError" class="error"></span><br>
+        
+        <label for="inputConfirmPassword">Подтвердите пароль:</label>
+        <input type="password" id="inputConfirmPassword">
+        <span id="confirmPasswordError" class="error"></span><br>
+        
+        <button id="submitButton">Отправить</button>
+        
+
+        <script src="/js/registration.js"></script>
+
+    </body>
+</html>
