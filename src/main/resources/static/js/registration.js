@@ -1,63 +1,35 @@
-let submitBtn = document.getElementById("submitButton");
-let inputName = document.getElementById("inputName");
-let inputEmail = document.getElementById("inputEmail");
-let inputPassword = document.getElementById("inputPassword");
-let inputConfirmPassword = document.getElementById("inputConfirmPassword");
+const form = document.forms.item(0)
+form.addEventListener("submit", function (event) {
+    console.log("submit")
 
-submitBtn.onclick = function() {
-    let vname = inputName.value.trim();
-    let vemail = inputEmail.value.trim();
-    let vpassword = inputPassword.value;
-    let confirmPassword = inputConfirmPassword.value;
-    console.log(vname,vemail,vpassword);
+    let name = document.getElementById("name").value,
+        email = document.getElementById("email").value,
+        password = document.getElementById("password").value,
+        confirmPassword = document.getElementById("confirmPassword").value,
+        errorMessage = document.getElementById("errorMessage"),
+        confirmPasswordLabel = document.getElementById("confirmPasswordLabel");
 
-    // Сброс предыдущих сообщений об ошибках
-    document.getElementById('nameError').textContent = '';
-    document.getElementById('emailError').textContent = '';
-    document.getElementById('passwordError').textContent = '';
-    document.getElementById('confirmPasswordError').textContent = '';
-
-    // Проверка на пустоту имени
-    if (vname === '') {
-        document.getElementById('nameError').textContent = 'Введите имя';
-        document.getElementById('nameError').style.color = 'red';
-        return;
+    if (password !== confirmPassword) {
+        confirmPasswordLabel.style.display = "none"
+        errorMessage.style.display = "block"
+        return
     }
+    confirmPasswordLabel.style.display = "block"
+    errorMessage.style.display = "none"
 
-    // Проверка на пустоту email
-    if (vemail === '') {
-        document.getElementById('emailError').textContent = 'Введите email';
-        document.getElementById('emailError').style.color = 'red';
-        return;
-    }
+    fetch("http://192.168.102.37:8081/registration", {
+        method: 'POST', headers: {
+            'Content-Type': 'application/json'
+        }, body: JSON.stringify({
+            name,
+            email,
+            password,
+        })
+    }).then(response =>{
+        console.log(response.status)
+       return  response.text()
 
-    // Проверка на пустоту пароля
-    if (vpassword === '') {
-        document.getElementById('passwordError').textContent = 'Введите пароль';
-        document.getElementById('passwordError').style.color = 'red';
-        return;
-    }
-
-    // Проверка на совпадение пароля и подтверждения пароля
-    if (vpassword !== confirmPassword) {
-        document.getElementById('confirmPasswordError').textContent = 'Пароль и подтверждение пароля не совпадают';
-        document.getElementById('confirmPasswordError').style.color = 'red';
-        return;
-    }
-
-    
-    let registrationData = {
-        name: vname,
-        email: vemail,
-        password: vpassword
-    };
-    console.log(registrationData)
-    fetch("http://localhost:8081/registration",{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'},
-        body:JSON.stringify(registrationData)
-    }).then(response => response.text() )
-    .then(data =>   console.log(data))
-    .catch(err => console.error(err))
-};
+    } )
+        .then(data => console.log(data))
+        .catch(err => console.error(err));
+})

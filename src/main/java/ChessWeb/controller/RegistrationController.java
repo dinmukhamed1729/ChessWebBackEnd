@@ -2,35 +2,30 @@ package ChessWeb.controller;
 
 import ChessWeb.dto.RegistrationDto;
 import ChessWeb.service.UserService;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-@Slf4j
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 @RequiredArgsConstructor
-@RestController			
+@RestController
 public class RegistrationController {
-    
     private final UserService userService;
-    
-    
+
     @PostMapping("/registration")
-    public ResponseEntity<String> registrate(@RequestBody RegistrationDto user)  {
-        log.info(user.toString());
+    public ResponseEntity<String> registration(@RequestBody RegistrationDto model) {
+        System.out.println(model.email()+" ============================="+model.name());
         try {
-            userService.registerNewUser(user);
+            userService.registerNewUser(model);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User registration failed: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Restoration user failed: " + e.getMessage());
         }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
-        catch (Exception e) {
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Restration user failed: " + e.getMessage());
-        }
+        System.out.println(model.email()+" "+model.name());
         return ResponseEntity.ok("ok");
     }
-    
 }

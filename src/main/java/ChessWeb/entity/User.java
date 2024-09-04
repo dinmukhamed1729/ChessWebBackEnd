@@ -7,16 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Objects;
 import java.util.Set;
 
+import lombok.Builder;
+import lombok.With;
+import jakarta.persistence.*;
+
+import java.util.Set;
+
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(fluent = true)
-@Builder
 @Data
 @Entity
 @Table(name = "_user")
-public class User {
+public  class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,5 +35,4 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
-
 }

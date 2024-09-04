@@ -1,12 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en"><!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" href="data:,">
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Шахматная доска</title>
+	<style>
+		.chessboard {
+			display: grid;
+			grid-template-columns: repeat(8, 60px);
+			grid-template-rows: repeat(8, 60px);
+			border: 2px solid #333;
+		}
+		.chessboard div {
+			width: 60px;
+			height: 60px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 48px;
+		}
+		.black {
+			background-color: #769656;
+		}
+		.white {
+			background-color: #eeeed2;
+		}
+		.piece {
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
-    Hello world
+<div class="chessboard" id="chessboard">
+	<!-- The JavaScript will insert the squares and pieces here -->
+</div>
+
+<script>
+	const pieces = {
+		'r': '♜', 'n': '♞', 'b': '♝', 'q': '♛', 'k': '♚', 'p': '♟',
+		'R': '♖', 'N': '♘', 'B': '♗', 'Q': '♕', 'K': '♔', 'P': '♙'
+	};
+
+	const initialBoard = [
+		'rnbqkbnr',
+		'pppppppp',
+		'        ',
+		'        ',
+		'        ',
+		'        ',
+		'PPPPPPPP',
+		'RNBQKBNR'
+	];
+
+	const boardElement = document.getElementById('chessboard');
+
+	for (let i = 0; i < 8; i++) {
+		for (let j = 0; j < 8; j++) {
+			const square = document.createElement('div');
+			square.className = (i + j) % 2 === 0 ? 'white' : 'black';
+			square.dataset.row = i;
+			square.dataset.col = j;
+
+			const piece = initialBoard[i][j];
+			if (piece !== ' ') {
+				const pieceElement = document.createElement('div');
+				pieceElement.innerText = pieces[piece];
+				pieceElement.className = 'piece';
+				pieceElement.draggable = true;
+				pieceElement.id = `piece-${i}-${j}`;
+				pieceElement.addEventListener('dragstart', dragStart);
+				pieceElement.addEventListener('dragend', dragEnd);
+				pieceElement.addEventListener('', dragEnd);
+
+				square.appendChild(pieceElement);
+			}
+
+			square.addEventListener('dragover', dragOver);
+			square.addEventListener('drop', drop);
+			boardElement.appendChild(square);
+		}
+	}
+
+	function dragStart(e) {
+		e.dataTransfer.setData('text/plain', e.target.id);
+		setTimeout(() => {
+			e.target.style.visibility = 'hidden';
+		}, 0);
+	}
+
+	function dragEnd(e) {
+		e.target.style.visibility = 'visible';
+	}
+
+	function dragOver(e) {
+		e.preventDefault();
+	}
+
+	function drop(e) {
+		e.preventDefault();
+		const id = e.dataTransfer.getData('text');
+		const piece = document.getElementById(id);
+		e.target.appendChild(piece);
+	}
+</script>
 </body>
+
 </html>

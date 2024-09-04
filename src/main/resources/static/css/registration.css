@@ -1,0 +1,70 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "sans-serif";
+}
+
+body {
+    background-color: var(--pageBackground);
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+}
+.formWrapper{
+    border-radius: 15px;
+    background-color: var(--wrapperBorderBackground);
+    width: 400px;
+    padding: 20px;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.form-control{
+    background-color: var(--inputBacground);
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.form-control::placeholder{
+    color: var(--textColor);
+}
+
+span{
+    color: var(--errorColor);
+    display: none;
+}
+
+.btn.btn-primary{
+    background-color: var(--buttonBackground);
+    padding: 10px  20px;
+    border-radius: 8px;
+    border:none;
+
+}
+.error-message {
+    display: none;
+}
+
+.error-message.error{
+    color: var(--errorColor);
+    display: block;
+}
+
+
+
