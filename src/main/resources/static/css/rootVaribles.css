@@ -1,0 +1,10 @@
+:root {
+    --pageBackground : #DFD0B8;
+    --buttonBackground : #948979;
+    --buttonBorderBackground: #E8DFCA;
+    --inputBorderBackground: #3C5B6F;
+    --inputBacground: #E8DFCA;
+    --wrapperBorderBackground: #3C5B6F;
+    --textColor: #000;
+    --errorColor: #F00;
+}
