@@ -1,0 +1,23 @@
+### GET request to example server
+GET http://localhost:8081/static/js/constans.js
+
+###
+POST http://localhost:8081/login
+Content-Type: application/json
+
+{
+  "username": "din",
+  "password": "pass"
+}
+
+
+###
+# @no-redirect
+POST http://localhost:8081/registration
+Content-Type: application/json
+
+{
+  "name": "ass",
+  "email": "email@emai.com",
+  "password": "pass"
+}

@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.user-list {
+    margin: 0 auto;
+    background-color: var(--buttonBackground);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--inputBorderBackground);
+}
+
+.user-item:last-child {
+    border-bottom: none;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.add-button {
+    background-color: var(--buttonBackground);
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.search-group {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--wrapperBorderBackground);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto;
+}
+
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.send-btn {
+    background-color: var(--buttonBackground);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-left: 10px;
+}
+
