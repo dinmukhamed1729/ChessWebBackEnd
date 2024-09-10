@@ -1,4 +1,7 @@
+
+
 const form = document.forms.item(0)
+
 form.addEventListener("submit", function (event) {
     console.log("submit")
 
@@ -17,7 +20,7 @@ form.addEventListener("submit", function (event) {
     confirmPasswordLabel.style.display = "block"
     errorMessage.style.display = "none"
 
-    fetch("http://192.168.102.37:8081/registration", {
+    fetch(`${window.location.origin}/registration`, {
         method: 'POST', headers: {
             'Content-Type': 'application/json'
         }, body: JSON.stringify({

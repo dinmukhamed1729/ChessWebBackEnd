@@ -1,0 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "sans-serif";
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--pageBackground);
+}
+
+.dialog-box {
+    width: 400px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: var(--wrapperBorderBackground);
+}
+
+.input-group {
+    display: flex;
+}
+
+.output {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: var(--inputBacground);
+
+}
+
+.input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    background-color: var(--inputBacground);
+
+}
+.message{
+    padding: 10px;
+    width: auto;
+    height: auto;
+    margin-top: 13px  ;
+    border: 10px solid var(--buttonBackground);
+    background-color: var(--buttonBackground);
+}
+.send-btn {
+    padding: 10px 20px;
+    background-color: var(--buttonBackground);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.send-btn:hover {
+    background-color: #218838;
+}

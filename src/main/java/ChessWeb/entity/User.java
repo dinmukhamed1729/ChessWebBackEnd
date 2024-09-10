@@ -1,29 +1,20 @@
 package ChessWeb.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.util.Objects;
 import java.util.Set;
-
-import lombok.Builder;
-import lombok.With;
-import jakarta.persistence.*;
-
-import java.util.Set;
-
+@ToString(exclude = "friends")
+@EqualsAndHashCode(exclude = "friends")
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(fluent = true)
-@Data
 @Entity
 @Table(name = "_user")
-public  class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,4 +26,17 @@ public  class User {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "_user_friend",
+            joinColumns = @JoinColumn(name = "_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "_friend_id")
+    )
+    private Set<User> friends;
+
+
+
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
 }
