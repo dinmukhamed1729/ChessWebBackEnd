@@ -1,5 +1,3 @@
-
-
 const form = document.forms.item(0)
 
 form.addEventListener("submit", function (event) {
@@ -28,11 +26,11 @@ form.addEventListener("submit", function (event) {
             email,
             password,
         })
-    }).then(response =>{
+    }).then(response => {
         console.log(response.status)
-       return  response.text()
+        return response.text()
 
-    } )
+    })
         .then(data => console.log(data))
         .catch(err => console.error(err));
 })

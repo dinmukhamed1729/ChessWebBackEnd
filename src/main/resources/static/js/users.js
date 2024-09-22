@@ -1,6 +1,6 @@
 
 const userList = document.getElementById("users-list")
-fetch(`${window.location.origin}/allUsers`)
+fetch(`${window.location.origin}/user/allUsers`)
     .then(response => {
         console.log(response.status)
         return response.json()
@@ -23,7 +23,7 @@ fetch(`${window.location.origin}/allUsers`)
             addButton.onclick = () => {
 
 
-                fetch(`${window.location.origin}/addFriend`, {
+                fetch(`${window.location.origin}/user/addFriend`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

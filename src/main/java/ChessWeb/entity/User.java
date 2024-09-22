@@ -26,7 +26,7 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
-
+    private Long gameId;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "_user_friend",
             joinColumns = @JoinColumn(name = "_user_id"),

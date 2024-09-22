@@ -16,11 +16,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/icons/")
                 .setCachePeriod(3600)
                 .resourceChain(false);
-
-        registry.addResourceHandler("/constans.js")
-                .addResourceLocations("classpath:/js/")
-                .setCachePeriod(3600)
-                .resourceChain(false);
-
     }
 }

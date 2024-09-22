@@ -21,7 +21,7 @@ public record UserServiceImpl(UserRepository userRepository, PasswordEncoder pas
 
         if (userRepository.existsByEmail(registrationDto.email()))
             throw new DataIntegrityViolationException("User with email " + registrationDto.email() + " already exists.");
-        userRepository.save(new User(null, registrationDto.name(), registrationDto.email(), passwordEncoder.encode(registrationDto.password()), null, null));
+        userRepository.save(new User(null, registrationDto.name(), registrationDto.email(), passwordEncoder.encode(registrationDto.password()),null, null, null));
     }
 
     public List<User> getAllUsers() {
@@ -42,5 +42,30 @@ public record UserServiceImpl(UserRepository userRepository, PasswordEncoder pas
     public List<UserDto> findAllFriends(String name) {
         return userRepository.findByName(name).orElseThrow(() -> new UsernameNotFoundException("User %s not found".formatted(name)))
                 .friends().stream().map(it -> new UserDto(it.id(), it.name())).toList();
+    }
+
+    @Override
+    public void newGame(String from, String sendTo, Long gameId) {
+        var player2 = userRepository.findByName(from)
+                .orElseThrow(() -> new UsernameNotFoundException("User %s not found".formatted(from)))
+                .gameId(gameId);
+        var player1 = userRepository.findByName(sendTo)
+                .orElseThrow(() -> new UsernameNotFoundException("User %s not found".formatted(sendTo)));
+
+        player1.gameId(gameId);
+        player2.gameId(gameId);
+
+        userRepository.save(player2);
+        userRepository.save(player1);
+    }
+
+    @Override
+    public Long getGameIdByUserName(String username) {
+        return userRepository.findByName(username).orElseThrow(() -> new UsernameNotFoundException("User %s not found".formatted(username))).gameId();
+    }
+
+    @Override
+    public List<User> findByGameId(Long gameId) {
+        return userRepository.findAllByGameId(gameId);
     }
 }

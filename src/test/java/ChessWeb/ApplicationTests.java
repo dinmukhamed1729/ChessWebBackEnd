@@ -2,6 +2,7 @@ package ChessWeb;
 
 import ChessWeb.dto.RegistrationDto;
 import ChessWeb.entity.User;
+import ChessWeb.game.Board;
 import ChessWeb.repository.UserRepository;
 import ChessWeb.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -17,9 +18,14 @@ class ApplicationTests {
 	UserService userService;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	Board board;
+
 	@Test
 	void contextLoads() {
 	}
+
+
 
 	@Test
 	@Transactional

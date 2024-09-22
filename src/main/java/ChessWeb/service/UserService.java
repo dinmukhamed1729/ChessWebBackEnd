@@ -14,4 +14,10 @@ public  interface UserService {
     void addFriend(String user, String friendName);
 
     List<UserDto> findAllFriends(String name);
+
+    void newGame(String from, String sendTo, Long gameId);
+
+    Long getGameIdByUserName(String username);
+
+    List<User> findByGameId(Long gameId);
 }
